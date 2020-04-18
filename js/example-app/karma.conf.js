@@ -2,6 +2,13 @@
 if (process.env.CI) {
   process.env.CHROME_BIN = require('puppeteer').executablePath();
   process.env.FIREFOX_BIN = require('puppeteer').executablePath();
+
+  if(process.env.PUPPETEER_PRODUCT === "firefox") {
+    process.env.FIREFOX_BIN = process.env.FIREFOX_BIN.replace(
+      'linux-latest',
+      require('fs').readdirSync(process.env.FIREFOX_BIN.replace('/linux-latest/firefox/firefox', ''))[0],
+    );
+  }
 }
 
 // Karma configuration file, see link for more information
@@ -41,8 +48,6 @@ module.exports = function (config) {
         base: 'ChromeHeadless',
         flags: [
           '--no-sandbox', // required to run without privileges in docker
-          '--user-data-dir=/tmp/chrome-test-profile',
-          '--disable-web-security'
         ]
       }
     },
