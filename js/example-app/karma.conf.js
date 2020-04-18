@@ -1,6 +1,7 @@
 // https://github.com/karma-runner/karma-chrome-launcher#headless-chromium-with-puppeteer
 if (process.env.CI) {
   process.env.CHROME_BIN = require('puppeteer').executablePath();
+  process.env.FIREFOX_BIN = require('puppeteer').executablePath();
 }
 
 // Karma configuration file, see link for more information
@@ -13,6 +14,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
