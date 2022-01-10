@@ -53,15 +53,6 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-    restartOnFileChange: true,
-    concurrency: 1,
-    customLaunchers: {
-      ChromeHeadlessNoSandbox: {
-        base: 'ChromeHeadless',
-        flags: [
-          '--no-sandbox', // required to run without privileges in docker
-        ]
-      }
-    },
+    restartOnFileChange: true
   });
 };
